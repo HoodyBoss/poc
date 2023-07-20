@@ -1,0 +1,3573 @@
+swagger: '2.0'
+info:
+  description: 'Lastupdate 2023/03/27 14:49'
+  title: MyProject
+  version: v1.0.0
+paths:
+  /WeatherForecast:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/WeatherForecast'
+            type: array
+      tags:
+        - WeatherForecast
+      operationId: GetWeatherForecast
+  /api/v1/Authentication/ValidateAccess:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ValidateAccessModel'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BooleanResponseModel'
+      tags:
+        - Authentication
+  '/api/v1/Client/CalFeeForDeleteAccount/{userRefId}':
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: path
+          name: userRefId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CanDeleteModelResponseModel'
+      tags:
+        - Client
+  '/api/v1/Client/CancelTransfer/{id}':
+    put:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BooleanResponseModel'
+      tags:
+        - Client
+  '/api/v1/Client/CheckStrategySeat/{userRefId}':
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: path
+          name: userRefId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PackageSeatModelResponseModel'
+      tags:
+        - Client
+  '/api/v1/Client/ConfirmDeleteAccount/{userRefId}':
+    post:
+      consumes:
+        - application/json
+        - text/json
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: path
+          name: userRefId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ConfirmDeleteModel'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ReponseConfirmDeleteModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/ConfirmUploadSlip:
+    put:
+      consumes:
+        - multipart/form-data
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - format: int32
+          in: formData
+          name: TransferId
+          type: integer
+        - format: binary
+          in: formData
+          name: FileSlip
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BooleanResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/CreateTransfer:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateTransferModel'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Int32ResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/CreateUser:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateUserModel'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResponseUserModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/CreateUserStrategy:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateUserStrategyModel'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StrategyModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/GetBillings:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: query
+          name: TextSearch
+          type: string
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - enum:
+            - 1
+            - 2
+          format: int32
+          in: query
+          name: Status
+          type: integer
+        - format: int32
+          in: query
+          name: UserId
+          type: integer
+        - enum:
+            - 1
+            - 2
+          format: int32
+          in: query
+          name: WalletType
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BillingListModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/GetMyPackage:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/MyStrategyModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/GetPackageData:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - format: int32
+          in: query
+          name: packageId
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PackageModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/GetPackages:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - enum:
+            - 1
+            - 2
+          format: int32
+          in: query
+          name: Section
+          type: integer
+        - in: query
+          name: IsActive
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PackageListModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/GetSubscriptionData:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - format: int32
+          in: query
+          name: subscriptionId
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SubscriptionModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/GetSubscriptions:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: query
+          name: TextSearch
+          type: string
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - format: int32
+          in: query
+          name: Status
+          type: integer
+        - format: int32
+          in: query
+          name: UserId
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SubscriptionListModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/GetTransaction:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: query
+          name: TextSearch
+          type: string
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+          format: int32
+          in: query
+          name: Type
+          type: integer
+        - enum:
+            - 1
+            - 2
+          format: int32
+          in: query
+          name: WalletType
+          type: integer
+        - format: int32
+          in: query
+          name: UserId
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TransactionListModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/GetTransfer:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - format: int32
+          in: query
+          name: UserId
+          type: integer
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+          format: int32
+          in: query
+          name: Status
+          type: integer
+        - in: query
+          name: TextSearch
+          type: string
+        - enum:
+            - 1
+            - 2
+          format: int32
+          in: query
+          name: WalletType
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TransferListModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/GetTransferDetail:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - format: int32
+          in: query
+          name: transferId
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TransferDetailModelResponseModel'
+      tags:
+        - Client
+  '/api/v1/Client/GetUrlUploadFromLine/{transferId}':
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - format: int32
+          in: path
+          name: transferId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BooleanResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/GetUserData:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UserDetailModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/GetUserStrategys:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: query
+          name: TextSearch
+          type: string
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - format: int32
+          in: query
+          name: Status
+          type: integer
+        - format: int32
+          in: query
+          name: UserId
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UserStrategyListModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/GetWalletByUserId:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/WalletModelListResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/RenewPackage:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateRenewPackage'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RenewPackageModelResponseModel'
+      tags:
+        - Client
+  '/api/v1/Client/StartStrategy/{userRefId}/{id}':
+    put:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: path
+          name: userRefId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StrategyModelResponseModel'
+      tags:
+        - Client
+  '/api/v1/Client/StopStrategy/{userRefId}/{id}':
+    put:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: path
+          name: userRefId
+          required: true
+          type: string
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StrategyModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/Subscription:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateSubscriptionModel'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Int32ResponseModel'
+      tags:
+        - Client
+  '/api/v1/Client/UnSubscription/{id}':
+    put:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/BooleanResponseModel'
+      tags:
+        - Client
+  /api/v1/Client/UpdateUser:
+    put:
+      consumes:
+        - application/json
+        - text/json
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateClientUserModel'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResponseUserModelResponseModel'
+      tags:
+        - Client
+  /api/v1/Dashboard/GetFee:
+    get:
+      parameters:
+        - format: int32
+          in: query
+          name: Year
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Dashboard
+  /api/v1/Dashboard/GetSubscription:
+    get:
+      parameters:
+        - format: int32
+          in: query
+          name: Year
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Dashboard
+  /api/v1/Dashboard/GetUserFee:
+    get:
+      parameters:
+        - format: int32
+          in: query
+          name: Year
+          type: integer
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - enum:
+            - 1
+            - 2
+          format: int32
+          in: query
+          name: Status
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Dashboard
+  /api/v1/Dashboard/GetUserSpend:
+    get:
+      parameters:
+        - format: int32
+          in: query
+          name: Year
+          type: integer
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Dashboard
+  /api/v1/Dashboard/GetUserStatus:
+    get:
+      parameters:
+        - format: int32
+          in: query
+          name: Year
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Dashboard
+  /api/v1/Dashboard/GetUserWallet:
+    get:
+      parameters:
+        - format: int32
+          in: query
+          name: Year
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Dashboard
+  '/api/v1/FileManagement/DownloadFile/{imageKey}':
+    get:
+      parameters:
+        - in: path
+          name: imageKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - FileManagement
+  '/api/v1/FileManagement/GetUploadFile/{imageKey}':
+    get:
+      parameters:
+        - in: path
+          name: imageKey
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - FileManagement
+  /api/v1/Public/GetCurrencyETH:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Public
+  /api/v1/Public/GetCurrencyUSD:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Public
+  /api/v1/Public/LineWebhook:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Public
+  '/api/v1/Public/Promptpay/{promtpaynumber}/{amount}':
+    get:
+      parameters:
+        - in: path
+          name: promtpaynumber
+          required: true
+          type: string
+        - format: double
+          in: path
+          name: amount
+          required: true
+          type: number
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Public
+  /api/v1/Public/SendApproveMessage:
+    post:
+      parameters:
+        - format: int32
+          in: query
+          name: transferId
+          type: integer
+        - in: query
+          name: key
+          type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Public
+  /api/v1/Public/SendRequestApproveMessage:
+    post:
+      parameters:
+        - format: int32
+          in: query
+          name: transferId
+          type: integer
+        - in: query
+          name: key
+          type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Public
+  /api/v1/Public/TestPeak:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Public
+  /api/v1/Public/UploadSlip:
+    put:
+      consumes:
+        - multipart/form-data
+      parameters:
+        - format: uuid
+          in: formData
+          name: TransferToken
+          type: string
+        - format: binary
+          in: formData
+          name: FileSlip
+          type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Public
+  /api/v1/Report/ExportOutstandingReport:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OutstandingReportListQueryModel'
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Report
+  /api/v1/Report/ExportPackageReport:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PackageReportListQueryModel'
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Report
+  /api/v1/Report/GetOutstandingReport:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: query
+          name: TextSearch
+          type: string
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - collectionFormat: multi
+          in: query
+          items:
+            $ref: '#/definitions/UserStatusEnum'
+          name: UserStatus
+          type: array
+        - collectionFormat: multi
+          in: query
+          items:
+            format: int32
+            type: integer
+          name: Status
+          type: array
+        - collectionFormat: multi
+          in: query
+          items:
+            format: int32
+            type: integer
+          name: TransactionType
+          type: array
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/OutstandingReportListModelResponseModel'
+      tags:
+        - Report
+  /api/v1/Report/GetPackageName:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PackageNameModelListResponseModel'
+      tags:
+        - Report
+  /api/v1/Report/GetPackageReport:
+    get:
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: query
+          name: TextSearch
+          type: string
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - collectionFormat: multi
+          in: query
+          items:
+            $ref: '#/definitions/UserStatusEnum'
+          name: UserStatus
+          type: array
+        - collectionFormat: multi
+          in: query
+          items:
+            format: int32
+            type: integer
+          name: Status
+          type: array
+        - collectionFormat: multi
+          in: query
+          items:
+            format: int32
+            type: integer
+          name: PackageId
+          type: array
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PackageReportListModelResponseModel'
+      tags:
+        - Report
+  /api/v1/Scheduler/DailyCalculatePerformanceFee:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Scheduler
+  /api/v1/Scheduler/DailySubscription:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Scheduler
+  /api/v1/Scheduler/DarilyCalulateServiceFee:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Scheduler
+  /api/v1/Scheduler/MonthlyBilling:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Scheduler
+  /api/v1/Scheduler/MonthlyTransaction:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Scheduler
+  /api/v1/Setting/CreatePackage:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PackageDto'
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/CreateTokenAddLineMember:
+    post:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/DeleteLineAdmin:
+    delete:
+      parameters:
+        - format: int32
+          in: query
+          name: userId
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/GetChartOfAccounts:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/GetLineAdmin:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/GetLineAdminSelector:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/GetLineOfficialAccounts:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/GetPackageData:
+    get:
+      parameters:
+        - format: int32
+          in: query
+          name: packageId
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/GetPackages:
+    get:
+      parameters:
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - enum:
+            - 1
+            - 2
+          format: int32
+          in: query
+          name: Section
+          type: integer
+        - in: query
+          name: IsActive
+          type: boolean
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/GetPreview:
+    get:
+      parameters:
+        - in: query
+          name: key
+          type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/GetReceiveChannels:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/GetSetting:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/SetChartOfAccounts:
+    put:
+      consumes:
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            items:
+              $ref: '#/definitions/ChartOfAccountModel'
+            type: array
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/SetLineOfficialAccounts:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            items:
+              $ref: '#/definitions/LineAccountModel'
+            type: array
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/SetReceiveChannels:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            items:
+              $ref: '#/definitions/ReceiveChannelModel'
+            type: array
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/SetSetting:
+    put:
+      consumes:
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            items:
+              $ref: '#/definitions/SettingModel'
+            type: array
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/UpdatePackage:
+    put:
+      consumes:
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PackageModel'
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/UploadFile:
+    post:
+      consumes:
+        - multipart/form-data
+      parameters:
+        - format: binary
+          in: formData
+          name: File
+          type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  /api/v1/Setting/UploadSlipImage:
+    post:
+      consumes:
+        - multipart/form-data
+      parameters:
+        - format: binary
+          in: formData
+          name: file
+          type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Setting
+  '/api/v1/Transfer/AcceptTransfer/{id}':
+    put:
+      parameters:
+        - format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Transfer
+  '/api/v1/Transfer/AcceptTransferByToken/{token}':
+    put:
+      parameters:
+        - in: path
+          name: token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Transfer
+  /api/v1/Transfer/ComfirmWithdraw:
+    put:
+      consumes:
+        - multipart/form-data
+      parameters:
+        - format: int32
+          in: formData
+          name: TransferId
+          type: integer
+        - format: int32
+          in: formData
+          name: UserId
+          type: integer
+        - format: binary
+          in: formData
+          name: FileSlip
+          type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Transfer
+  /api/v1/Transfer/GetWalletByUserId:
+    get:
+      parameters:
+        - format: int32
+          in: query
+          name: userId
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Transfer
+  '/api/v1/Transfer/RejectTransfer/{id}':
+    put:
+      parameters:
+        - format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - Transfer
+  /api/v1/User/GetBillings:
+    get:
+      parameters:
+        - in: query
+          name: TextSearch
+          type: string
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - enum:
+            - 1
+            - 2
+          format: int32
+          in: query
+          name: Status
+          type: integer
+        - format: int32
+          in: query
+          name: UserId
+          type: integer
+        - enum:
+            - 1
+            - 2
+          format: int32
+          in: query
+          name: WalletType
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  /api/v1/User/GetSubscriptions:
+    get:
+      parameters:
+        - in: query
+          name: TextSearch
+          type: string
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - format: int32
+          in: query
+          name: Status
+          type: integer
+        - format: int32
+          in: query
+          name: UserId
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  /api/v1/User/GetTransaction:
+    get:
+      parameters:
+        - in: query
+          name: TextSearch
+          type: string
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+          format: int32
+          in: query
+          name: Type
+          type: integer
+        - enum:
+            - 1
+            - 2
+          format: int32
+          in: query
+          name: WalletType
+          type: integer
+        - format: int32
+          in: query
+          name: UserId
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  /api/v1/User/GetTransfer:
+    get:
+      parameters:
+        - format: int32
+          in: query
+          name: UserId
+          type: integer
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+          format: int32
+          in: query
+          name: Status
+          type: integer
+        - in: query
+          name: TextSearch
+          type: string
+        - enum:
+            - 1
+            - 2
+          format: int32
+          in: query
+          name: WalletType
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  /api/v1/User/GetTransferAmount:
+    get:
+      parameters:
+        - format: int32
+          in: query
+          name: userId
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  /api/v1/User/GetUserData:
+    get:
+      parameters:
+        - format: int32
+          in: query
+          name: userId
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  /api/v1/User/GetUserStrategys:
+    get:
+      parameters:
+        - in: query
+          name: TextSearch
+          type: string
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - format: int32
+          in: query
+          name: Status
+          type: integer
+        - format: int32
+          in: query
+          name: UserId
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  /api/v1/User/GetUsers:
+    get:
+      parameters:
+        - in: query
+          name: TextSearch
+          type: string
+        - format: int32
+          in: query
+          name: PageNumber
+          type: integer
+        - format: int32
+          in: query
+          name: PageSize
+          type: integer
+        - in: query
+          name: SortColumn
+          type: string
+        - in: query
+          name: SortByDesc
+          type: boolean
+        - enum:
+            - 1
+            - 2
+            - 3
+          format: int32
+          in: query
+          name: Status
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  /api/v1/User/SetUsers:
+    put:
+      consumes:
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            items:
+              $ref: '#/definitions/UpdateUserModel'
+            type: array
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  /api/v1/User/TestAutherize:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  /api/v1/User/TestFlexApproveMessage:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  /api/v1/User/TestFlexMessage:
+    get:
+      parameters: []
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  /api/v1/User/TestMessage:
+    get:
+      parameters:
+        - in: query
+          name: message
+          type: string
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  '/api/v1/User/Unsubscription/{id}/{userId}':
+    put:
+      parameters:
+        - format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - format: int32
+          in: path
+          name: userId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success
+      tags:
+        - User
+  /api/v1/UserOfficer/CreateUserOfficer:
+    post:
+      consumes:
+        - application/json
+        - text/json
+      produces:
+        - text/plain
+        - application/json
+        - text/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateUserOfficerModel'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResponseCreateUserOfficerModelResponseModel'
+      tags:
+        - UserOfficer
+definitions:
+  BillingDetailModel:
+    additionalProperties: false
+    properties:
+      amount:
+        format: double
+        type: number
+      attachment:
+        type: string
+        x-nullable: true
+      billingId:
+        format: int32
+        type: integer
+      createBy:
+        format: int32
+        type: integer
+      createTimeStamp:
+        format: date-time
+        type: string
+      currency:
+        $ref: '#/definitions/CurrencyEnum'
+      date:
+        format: date-time
+        type: string
+      email:
+        type: string
+        x-nullable: true
+      status:
+        $ref: '#/definitions/BillingEnum'
+      updateBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      updateTimeStamp:
+        format: date-time
+        type: string
+        x-nullable: true
+      userId:
+        format: int32
+        type: integer
+    type: object
+  BillingEnum:
+    enum:
+      - 1
+      - 2
+    format: int32
+    type: integer
+  BillingListModel:
+    additionalProperties: false
+    properties:
+      itemList:
+        items:
+          $ref: '#/definitions/BillingDetailModel'
+        type: array
+        x-nullable: true
+      pageNumber:
+        format: int32
+        type: integer
+      pageSize:
+        format: int32
+        type: integer
+      totalItemCount:
+        format: int32
+        type: integer
+      totalPageCount:
+        format: int32
+        type: integer
+    type: object
+  BillingListModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/BillingListModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  BooleanResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        type: boolean
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  CanDeleteModel:
+    additionalProperties: false
+    properties:
+      canDelete:
+        type: boolean
+      code:
+        format: int32
+        type: integer
+      feeSummary:
+        format: double
+        type: number
+      id:
+        format: int32
+        type: integer
+      message:
+        type: string
+        x-nullable: true
+      penaltyFee:
+        format: double
+        type: number
+      userRefId:
+        type: string
+        x-nullable: true
+      wallet:
+        format: double
+        type: number
+    type: object
+  CanDeleteModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/CanDeleteModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  ChartOfAccountModel:
+    additionalProperties: false
+    properties:
+      condition:
+        type: string
+        x-nullable: true
+      createBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      createTimeStamp:
+        format: date-time
+        type: string
+      description:
+        type: string
+        x-nullable: true
+      id:
+        format: int32
+        type: integer
+      information:
+        type: string
+        x-nullable: true
+      mappingAccount:
+        type: string
+        x-nullable: true
+      updateBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      updateTimeStamp:
+        format: date-time
+        type: string
+        x-nullable: true
+    type: object
+  ConfirmDeleteModel:
+    additionalProperties: false
+    properties:
+      bankAccountName:
+        type: string
+        x-nullable: true
+      bankAccountNumber:
+        type: string
+        x-nullable: true
+      bankName:
+        type: string
+        x-nullable: true
+      isWithdraw:
+        type: boolean
+    type: object
+  CreateRenewPackage:
+    additionalProperties: false
+    properties:
+      subscriptionId:
+        format: int32
+        type: integer
+    type: object
+  CreateSubscriptionModel:
+    additionalProperties: false
+    properties:
+      packageId:
+        format: int32
+        type: integer
+    type: object
+  CreateTransferModel:
+    additionalProperties: false
+    properties:
+      amount:
+        format: double
+        type: number
+    type: object
+  CreateUserModel:
+    additionalProperties: false
+    properties:
+      email:
+        type: string
+        x-nullable: true
+      firstName:
+        type: string
+        x-nullable: true
+      lastName:
+        type: string
+        x-nullable: true
+      lineNotifyToken:
+        type: string
+        x-nullable: true
+      phone:
+        type: string
+        x-nullable: true
+      profileUrl:
+        type: string
+        x-nullable: true
+      userRefId:
+        type: string
+        x-nullable: true
+      username:
+        type: string
+        x-nullable: true
+    type: object
+  CreateUserOfficerModel:
+    additionalProperties: false
+    properties:
+      authId:
+        type: string
+        x-nullable: true
+      email:
+        type: string
+        x-nullable: true
+      firstName:
+        type: string
+        x-nullable: true
+      lastName:
+        type: string
+        x-nullable: true
+    type: object
+  CreateUserStrategyModel:
+    additionalProperties: false
+    properties:
+      equityCurrency:
+        format: int32
+        type: integer
+      hurdleRate:
+        format: double
+        type: number
+      inputEquity:
+        format: double
+        type: number
+      market:
+        type: string
+        x-nullable: true
+      performanceFeePeriod:
+        format: int32
+        type: integer
+      performanceRate:
+        format: double
+        type: number
+      serviceFeePeriod:
+        format: int32
+        type: integer
+      serviceRate:
+        format: double
+        type: number
+      strategyId:
+        type: string
+        x-nullable: true
+      strategyName:
+        type: string
+        x-nullable: true
+      userRefId:
+        type: string
+        x-nullable: true
+    type: object
+  CurrencyEnum:
+    enum:
+      - 1
+      - 2
+    format: int32
+    type: integer
+  FeeCaseEnum:
+    enum:
+      - 1
+      - 2
+      - 3
+    format: int32
+    type: integer
+  Int32ResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        format: int32
+        type: integer
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  LineAccountModel:
+    additionalProperties: false
+    properties:
+      createBy:
+        format: int32
+        type: integer
+      createTimeStamp:
+        format: date-time
+        type: string
+      isActive:
+        type: boolean
+      isDelete:
+        type: boolean
+      lineAddId:
+        type: string
+        x-nullable: true
+      lineId:
+        format: int32
+        type: integer
+      lineName:
+        type: string
+        x-nullable: true
+      token:
+        type: string
+        x-nullable: true
+      updateBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      updateTimeStamp:
+        format: date-time
+        type: string
+        x-nullable: true
+    type: object
+  MyStrategyModel:
+    additionalProperties: false
+    properties:
+      activeBot:
+        format: int32
+        type: integer
+      detailUrl:
+        type: string
+        x-nullable: true
+      isComingExpire:
+        type: boolean
+      packageId:
+        format: int32
+        type: integer
+        x-nullable: true
+      packageName:
+        type: string
+        x-nullable: true
+      periodType:
+        format: int32
+        type: integer
+        x-nullable: true
+      pricePerPeriod:
+        format: double
+        type: number
+        x-nullable: true
+      renewDate:
+        format: date-time
+        type: string
+        x-nullable: true
+      subscriptionId:
+        format: int32
+        type: integer
+        x-nullable: true
+      totalBot:
+        format: int32
+        type: integer
+    type: object
+  MyStrategyModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/MyStrategyModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  OutstandingReportListModel:
+    additionalProperties: false
+    properties:
+      itemList:
+        items:
+          $ref: '#/definitions/OutstandingReportModel'
+        type: array
+        x-nullable: true
+      pageNumber:
+        format: int32
+        type: integer
+      pageSize:
+        format: int32
+        type: integer
+      totalItemCount:
+        format: int32
+        type: integer
+      totalPageCount:
+        format: int32
+        type: integer
+    type: object
+  OutstandingReportListModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/OutstandingReportListModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  OutstandingReportListQueryModel:
+    additionalProperties: false
+    properties:
+      pageNumber:
+        format: int32
+        type: integer
+      pageSize:
+        format: int32
+        type: integer
+      sortByDesc:
+        type: boolean
+      sortColumn:
+        type: string
+        x-nullable: true
+      status:
+        items:
+          format: int32
+          type: integer
+        type: array
+        x-nullable: true
+      textSearch:
+        type: string
+        x-nullable: true
+      transactionType:
+        items:
+          format: int32
+          type: integer
+        type: array
+        x-nullable: true
+      userStatus:
+        items:
+          $ref: '#/definitions/UserStatusEnum'
+        type: array
+        x-nullable: true
+    type: object
+  OutstandingReportModel:
+    additionalProperties: false
+    properties:
+      accountCode:
+        type: string
+        x-nullable: true
+      amount:
+        format: double
+        type: number
+      createAt:
+        format: date-time
+        type: string
+      currency:
+        format: int32
+        type: integer
+      description:
+        type: string
+        x-nullable: true
+      email:
+        type: string
+        x-nullable: true
+      firstName:
+        type: string
+        x-nullable: true
+      lastName:
+        type: string
+        x-nullable: true
+      statusDate:
+        format: date-time
+        type: string
+        x-nullable: true
+      transactionName:
+        type: string
+        x-nullable: true
+      transactionType:
+        format: int32
+        type: integer
+      userId:
+        format: int32
+        type: integer
+      userRefId:
+        type: string
+        x-nullable: true
+      userStatus:
+        format: int32
+        type: integer
+    type: object
+  PackageDto:
+    additionalProperties: false
+    properties:
+      amount:
+        format: double
+        type: number
+      createBy:
+        format: int32
+        type: integer
+      createTimeStamp:
+        format: date-time
+        type: string
+      currency:
+        format: int32
+        type: integer
+      description:
+        type: string
+        x-nullable: true
+      detailUrl:
+        type: string
+        x-nullable: true
+      expireDate:
+        format: date-time
+        type: string
+        x-nullable: true
+      groupPackageId:
+        format: int32
+        type: integer
+      imageUrl:
+        type: string
+        x-nullable: true
+      isActive:
+        type: boolean
+      isFree:
+        type: boolean
+      isNew:
+        type: boolean
+      packageId:
+        format: int32
+        type: integer
+      period:
+        format: int32
+        type: integer
+      periodType:
+        $ref: '#/definitions/PeriodTypeEnum'
+      publishDate:
+        format: date-time
+        type: string
+      qty:
+        format: int32
+        type: integer
+      updateBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      updateTimeStamp:
+        format: date-time
+        type: string
+        x-nullable: true
+    type: object
+  PackageListModel:
+    additionalProperties: false
+    properties:
+      itemList:
+        items:
+          $ref: '#/definitions/PackageModel'
+        type: array
+        x-nullable: true
+      pageNumber:
+        format: int32
+        type: integer
+      pageSize:
+        format: int32
+        type: integer
+      totalItemCount:
+        format: int32
+        type: integer
+      totalPageCount:
+        format: int32
+        type: integer
+    type: object
+  PackageListModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/PackageListModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  PackageModel:
+    additionalProperties: false
+    properties:
+      amount:
+        format: double
+        type: number
+      createBy:
+        format: int32
+        type: integer
+      createTimeStamp:
+        format: date-time
+        type: string
+      currency:
+        format: int32
+        type: integer
+      description:
+        type: string
+        x-nullable: true
+      detailUrl:
+        type: string
+        x-nullable: true
+      expireDate:
+        format: date-time
+        type: string
+        x-nullable: true
+      groupPackageId:
+        format: int32
+        type: integer
+      imageUrl:
+        type: string
+        x-nullable: true
+      isActive:
+        type: boolean
+      isFree:
+        type: boolean
+      isNew:
+        type: boolean
+      packageId:
+        format: int32
+        type: integer
+      period:
+        format: int32
+        type: integer
+      periodType:
+        $ref: '#/definitions/PeriodTypeEnum'
+      publishDate:
+        format: date-time
+        type: string
+      qty:
+        format: int32
+        type: integer
+      updateBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      updateTimeStamp:
+        format: date-time
+        type: string
+        x-nullable: true
+    type: object
+  PackageModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/PackageModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  PackageNameModel:
+    additionalProperties: false
+    properties:
+      packageId:
+        format: int32
+        type: integer
+      packageName:
+        type: string
+        x-nullable: true
+    type: object
+  PackageNameModelListResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        items:
+          $ref: '#/definitions/PackageNameModel'
+        type: array
+        x-nullable: true
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  PackageReportListModel:
+    additionalProperties: false
+    properties:
+      itemList:
+        items:
+          $ref: '#/definitions/PackageReportModel'
+        type: array
+        x-nullable: true
+      pageNumber:
+        format: int32
+        type: integer
+      pageSize:
+        format: int32
+        type: integer
+      totalItemCount:
+        format: int32
+        type: integer
+      totalPageCount:
+        format: int32
+        type: integer
+    type: object
+  PackageReportListModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/PackageReportListModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  PackageReportListQueryModel:
+    additionalProperties: false
+    properties:
+      packageId:
+        items:
+          format: int32
+          type: integer
+        type: array
+        x-nullable: true
+      pageNumber:
+        format: int32
+        type: integer
+      pageSize:
+        format: int32
+        type: integer
+      sortByDesc:
+        type: boolean
+      sortColumn:
+        type: string
+        x-nullable: true
+      status:
+        items:
+          format: int32
+          type: integer
+        type: array
+        x-nullable: true
+      textSearch:
+        type: string
+        x-nullable: true
+      userStatus:
+        items:
+          $ref: '#/definitions/UserStatusEnum'
+        type: array
+        x-nullable: true
+    type: object
+  PackageReportModel:
+    additionalProperties: false
+    properties:
+      amount:
+        format: double
+        type: number
+      createAt:
+        format: date-time
+        type: string
+      email:
+        type: string
+        x-nullable: true
+      firstName:
+        type: string
+        x-nullable: true
+      lastChargeDate:
+        format: date-time
+        type: string
+        x-nullable: true
+      lastName:
+        type: string
+        x-nullable: true
+      packageId:
+        format: int32
+        type: integer
+      packageName:
+        type: string
+        x-nullable: true
+      periodDay:
+        format: int32
+        type: integer
+      status:
+        format: int32
+        type: integer
+        x-nullable: true
+      strategyQty:
+        format: int32
+        type: integer
+      subscriptionDate:
+        format: date-time
+        type: string
+        x-nullable: true
+      subscriptionId:
+        format: int32
+        type: integer
+      untilDate:
+        format: date-time
+        type: string
+        x-nullable: true
+      userId:
+        format: int32
+        type: integer
+      userRefId:
+        type: string
+        x-nullable: true
+      userStatus:
+        format: int32
+        type: integer
+      walletCurrency:
+        format: int32
+        type: integer
+    type: object
+  PackageSeatModel:
+    additionalProperties: false
+    properties:
+      bot:
+        format: int32
+        type: integer
+      canCreate:
+        type: boolean
+      code:
+        format: int32
+        type: integer
+      message:
+        type: string
+        x-nullable: true
+      seat:
+        format: int32
+        type: integer
+    type: object
+  PackageSeatModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/PackageSeatModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  PeriodTypeEnum:
+    enum:
+      - 1
+      - 2
+      - 3
+      - 4
+    format: int32
+    type: integer
+  ReceiveChannelModel:
+    additionalProperties: false
+    properties:
+      accountNumber:
+        type: string
+        x-nullable: true
+      bankAccountType:
+        type: string
+        x-nullable: true
+      branch:
+        type: string
+        x-nullable: true
+      channelType:
+        format: int32
+        type: integer
+      chartOfAccountNumber:
+        type: string
+        x-nullable: true
+      isActive:
+        type: boolean
+      isDelete:
+        type: boolean
+      name:
+        type: string
+        x-nullable: true
+      promptPay:
+        type: string
+        x-nullable: true
+      receiveChannelId:
+        format: int32
+        type: integer
+    type: object
+  RenewPackageModel:
+    additionalProperties: false
+    properties:
+      message:
+        type: string
+        x-nullable: true
+      type:
+        $ref: '#/definitions/RenewPackageTypeEnum'
+    type: object
+  RenewPackageModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/RenewPackageModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  RenewPackageTypeEnum:
+    enum:
+      - 1
+      - 2
+      - 3
+    format: int32
+    type: integer
+  ReponseConfirmDeleteModel:
+    additionalProperties: false
+    properties:
+      code:
+        format: int32
+        type: integer
+      id:
+        format: int32
+        type: integer
+      isDelete:
+        type: boolean
+      message:
+        type: string
+        x-nullable: true
+      userRefId:
+        type: string
+        x-nullable: true
+    type: object
+  ReponseConfirmDeleteModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/ReponseConfirmDeleteModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  ResponseCreateUserOfficerModel:
+    additionalProperties: false
+    properties:
+      code:
+        format: int32
+        type: integer
+      message:
+        type: string
+        x-nullable: true
+      userOfficerInfo:
+        $ref: '#/definitions/UserOfficerInfoModel'
+    type: object
+  ResponseCreateUserOfficerModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/ResponseCreateUserOfficerModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  ResponseEnum:
+    enum:
+      - 200
+      - 201
+      - 400
+      - 401
+      - 403
+      - 404
+      - 409
+      - 500
+    format: int32
+    type: integer
+  ResponseUserModel:
+    additionalProperties: false
+    properties:
+      code:
+        format: int32
+        type: integer
+      id:
+        format: int32
+        type: integer
+      isSuccess:
+        type: boolean
+      message:
+        type: string
+        x-nullable: true
+      userRefId:
+        type: string
+        x-nullable: true
+      username:
+        type: string
+        x-nullable: true
+    type: object
+  ResponseUserModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/ResponseUserModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  SectionEnum:
+    enum:
+      - 1
+      - 2
+    format: int32
+    type: integer
+  SettingModel:
+    additionalProperties: false
+    properties:
+      createBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      createTimeStamp:
+        format: date-time
+        type: string
+      key:
+        type: string
+        x-nullable: true
+      settingId:
+        format: int32
+        type: integer
+      updateBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      updateTimeStamp:
+        format: date-time
+        type: string
+        x-nullable: true
+      value:
+        type: string
+        x-nullable: true
+    type: object
+  StrategyModel:
+    additionalProperties: false
+    properties:
+      code:
+        format: int32
+        type: integer
+        x-nullable: true
+      id:
+        format: int32
+        type: integer
+        x-nullable: true
+      message:
+        type: string
+        x-nullable: true
+      name:
+        type: string
+        x-nullable: true
+      strategyId:
+        type: string
+        x-nullable: true
+    type: object
+  StrategyModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/StrategyModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  SubscriptionListModel:
+    additionalProperties: false
+    properties:
+      itemList:
+        items:
+          $ref: '#/definitions/SubscriptionModel'
+        type: array
+        x-nullable: true
+      pageNumber:
+        format: int32
+        type: integer
+      pageSize:
+        format: int32
+        type: integer
+      totalItemCount:
+        format: int32
+        type: integer
+      totalPageCount:
+        format: int32
+        type: integer
+    type: object
+  SubscriptionListModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/SubscriptionListModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  SubscriptionModel:
+    additionalProperties: false
+    properties:
+      amount:
+        format: double
+        type: number
+      createBy:
+        format: int32
+        type: integer
+      createTimeStamp:
+        format: date-time
+        type: string
+      currency:
+        format: int32
+        type: integer
+      expireDate:
+        format: date-time
+        type: string
+      isActive:
+        type: boolean
+      isSubscription:
+        type: boolean
+      name:
+        type: string
+        x-nullable: true
+      packageId:
+        format: int32
+        type: integer
+      period:
+        format: int32
+        type: integer
+      periodType:
+        $ref: '#/definitions/PeriodTypeEnum'
+      qty:
+        format: int32
+        type: integer
+      referenceSubscriptionId:
+        format: int32
+        type: integer
+        x-nullable: true
+      startDate:
+        format: date-time
+        type: string
+      subscriptionId:
+        format: int32
+        type: integer
+      updateBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      updateTimeStamp:
+        format: date-time
+        type: string
+        x-nullable: true
+      userId:
+        format: int32
+        type: integer
+    type: object
+  SubscriptionModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/SubscriptionModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  TransactionEnum:
+    enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+    format: int32
+    type: integer
+  TransactionListModel:
+    additionalProperties: false
+    properties:
+      itemList:
+        items:
+          $ref: '#/definitions/TransactionModel'
+        type: array
+        x-nullable: true
+      pageNumber:
+        format: int32
+        type: integer
+      pageSize:
+        format: int32
+        type: integer
+      totalItemCount:
+        format: int32
+        type: integer
+      totalPageCount:
+        format: int32
+        type: integer
+    type: object
+  TransactionListModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/TransactionListModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  TransactionModel:
+    additionalProperties: false
+    properties:
+      amount:
+        format: double
+        type: number
+      billingId:
+        format: int32
+        type: integer
+        x-nullable: true
+      createBy:
+        format: int32
+        type: integer
+      createTimeStamp:
+        format: date-time
+        type: string
+      currencyRate:
+        format: double
+        type: number
+        x-nullable: true
+      date:
+        format: date-time
+        type: string
+        x-nullable: true
+      feeRate:
+        format: double
+        type: number
+        x-nullable: true
+      info1:
+        type: string
+        x-nullable: true
+      info2:
+        type: string
+        x-nullable: true
+      profitAmount:
+        format: double
+        type: number
+        x-nullable: true
+      strategyId:
+        format: int32
+        type: integer
+        x-nullable: true
+      strategyName:
+        type: string
+        x-nullable: true
+      transactionId:
+        format: int32
+        type: integer
+      transactionThb:
+        format: double
+        type: number
+        x-nullable: true
+      transactionUsd:
+        format: double
+        type: number
+        x-nullable: true
+      type:
+        $ref: '#/definitions/TransactionEnum'
+      unit:
+        format: int32
+        type: integer
+        x-nullable: true
+      updateBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      updateTimeStamp:
+        format: date-time
+        type: string
+        x-nullable: true
+      userId:
+        format: int32
+        type: integer
+      walletType:
+        format: int32
+        type: integer
+    type: object
+  TransferDetailModel:
+    additionalProperties: false
+    properties:
+      amount:
+        format: double
+        type: number
+      bankAccountName:
+        type: string
+        x-nullable: true
+      bankAccountNumber:
+        type: string
+        x-nullable: true
+      bankName:
+        type: string
+        x-nullable: true
+      channelType:
+        format: int32
+        type: integer
+      createBy:
+        format: int32
+        type: integer
+      createTimeStamp:
+        format: date-time
+        type: string
+      receiveChannel:
+        $ref: '#/definitions/ReceiveChannelModel'
+      receiveChannelId:
+        format: int32
+        type: integer
+      slipImage:
+        type: string
+        x-nullable: true
+      status:
+        $ref: '#/definitions/TransferEnum'
+      transferId:
+        format: int32
+        type: integer
+      updateBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      updateTimeStamp:
+        format: date-time
+        type: string
+        x-nullable: true
+      userEmail:
+        type: string
+        x-nullable: true
+      userId:
+        format: int32
+        type: integer
+      walletType:
+        $ref: '#/definitions/WalletTypeEnum'
+    type: object
+  TransferDetailModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/TransferDetailModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  TransferEnum:
+    enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+    format: int32
+    type: integer
+  TransferListModel:
+    additionalProperties: false
+    properties:
+      itemList:
+        items:
+          $ref: '#/definitions/TransferDetailModel'
+        type: array
+        x-nullable: true
+      pageNumber:
+        format: int32
+        type: integer
+      pageSize:
+        format: int32
+        type: integer
+      totalItemCount:
+        format: int32
+        type: integer
+      totalPageCount:
+        format: int32
+        type: integer
+    type: object
+  TransferListModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/TransferListModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  UpdateClientUserModel:
+    additionalProperties: false
+    properties:
+      firstName:
+        type: string
+        x-nullable: true
+      lastName:
+        type: string
+        x-nullable: true
+      lineNotifyToken:
+        type: string
+        x-nullable: true
+      phone:
+        type: string
+        x-nullable: true
+      profileUrl:
+        type: string
+        x-nullable: true
+      status:
+        $ref: '#/definitions/UserStatusEnum'
+      userRefId:
+        type: string
+        x-nullable: true
+    type: object
+  UpdateUserModel:
+    additionalProperties: false
+    properties:
+      status:
+        $ref: '#/definitions/UserStatusEnum'
+      updateBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      userId:
+        format: int32
+        type: integer
+    type: object
+  UserDetailModel:
+    additionalProperties: false
+    properties:
+      activeTotalBot:
+        format: int32
+        type: integer
+      billingAmount:
+        format: double
+        type: number
+      dueDate:
+        format: date-time
+        type: string
+      feeCase:
+        $ref: '#/definitions/FeeCaseEnum'
+      firstname:
+        type: string
+        x-nullable: true
+      isActive:
+        type: boolean
+      isAdmin:
+        type: boolean
+      isUpgraded:
+        type: boolean
+      lastname:
+        type: string
+        x-nullable: true
+      monthlyBillingAmount:
+        format: double
+        type: number
+      pendingFee:
+        format: double
+        type: number
+      status:
+        $ref: '#/definitions/UserStatusEnum'
+      totalBotQty:
+        format: int32
+        type: integer
+      totalFee:
+        format: double
+        type: number
+      totalFeeThb:
+        format: double
+        type: number
+      totalFeeUsd:
+        format: double
+        type: number
+      totalSubscription:
+        format: int32
+        type: integer
+      totalSubscriptionBalance:
+        format: double
+        type: number
+      userEmail:
+        type: string
+        x-nullable: true
+      userId:
+        format: int32
+        type: integer
+      userImageUrl:
+        type: string
+        x-nullable: true
+      userPhone:
+        type: string
+        x-nullable: true
+      userRefId:
+        type: string
+        x-nullable: true
+      wallet:
+        items:
+          $ref: '#/definitions/WalletModel'
+        type: array
+        x-nullable: true
+    type: object
+  UserDetailModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/UserDetailModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  UserOfficerInfoModel:
+    additionalProperties: false
+    properties:
+      authId:
+        type: string
+        x-nullable: true
+      createBy:
+        format: int32
+        type: integer
+      createTimeStamp:
+        format: date-time
+        type: string
+      email:
+        type: string
+        x-nullable: true
+      firstName:
+        type: string
+        x-nullable: true
+      id:
+        format: int32
+        type: integer
+      lastName:
+        type: string
+        x-nullable: true
+      lineName:
+        type: string
+        x-nullable: true
+      lineUserId:
+        type: string
+        x-nullable: true
+      status:
+        format: int32
+        type: integer
+      tokenAddLineUser:
+        type: string
+        x-nullable: true
+      updateBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      updateTimeStamp:
+        format: date-time
+        type: string
+        x-nullable: true
+    type: object
+  UserStatusEnum:
+    enum:
+      - 1
+      - 2
+      - 3
+    format: int32
+    type: integer
+  UserStrategyListModel:
+    additionalProperties: false
+    properties:
+      itemList:
+        items:
+          $ref: '#/definitions/UserStrategyModel'
+        type: array
+        x-nullable: true
+      pageNumber:
+        format: int32
+        type: integer
+      pageSize:
+        format: int32
+        type: integer
+      totalItemCount:
+        format: int32
+        type: integer
+      totalPageCount:
+        format: int32
+        type: integer
+    type: object
+  UserStrategyListModelResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        $ref: '#/definitions/UserStrategyListModel'
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  UserStrategyModel:
+    additionalProperties: false
+    properties:
+      activeDate:
+        format: date-time
+        type: string
+        x-nullable: true
+      createBy:
+        format: int32
+        type: integer
+      createTimeStamp:
+        format: date-time
+        type: string
+      equityCurrency:
+        $ref: '#/definitions/CurrencyEnum'
+      hurdleRate:
+        format: double
+        type: number
+      marketBroker:
+        type: string
+        x-nullable: true
+      performanceFeePeriod:
+        format: int32
+        type: integer
+      performanceRate:
+        format: double
+        type: number
+      serviceFeePeriod:
+        format: int32
+        type: integer
+      serviceRate:
+        format: double
+        type: number
+      status:
+        format: int32
+        type: integer
+        x-nullable: true
+      strategyId:
+        type: string
+        x-nullable: true
+      strategyName:
+        type: string
+        x-nullable: true
+      updateBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      updateTimeStamp:
+        format: date-time
+        type: string
+        x-nullable: true
+      userId:
+        format: int32
+        type: integer
+      userStrategyId:
+        format: int32
+        type: integer
+    type: object
+  ValidateAccessModel:
+    additionalProperties: false
+    properties:
+      userClientId:
+        type: string
+        x-nullable: true
+    type: object
+  WalletModel:
+    additionalProperties: false
+    properties:
+      balance:
+        format: double
+        type: number
+      createBy:
+        format: int32
+        type: integer
+      createTimeStamp:
+        format: date-time
+        type: string
+      isActive:
+        type: boolean
+      type:
+        format: int32
+        type: integer
+      updateBy:
+        format: int32
+        type: integer
+        x-nullable: true
+      updateTimeStamp:
+        format: date-time
+        type: string
+        x-nullable: true
+      userId:
+        format: int32
+        type: integer
+      walletId:
+        format: int32
+        type: integer
+    type: object
+  WalletModelListResponseModel:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/ResponseEnum'
+      data:
+        items:
+          $ref: '#/definitions/WalletModel'
+        type: array
+        x-nullable: true
+      message:
+        type: string
+        x-nullable: true
+    type: object
+  WalletTypeEnum:
+    enum:
+      - 1
+      - 2
+    format: int32
+    type: integer
+  WeatherForecast:
+    additionalProperties: false
+    properties:
+      date:
+        format: date-time
+        type: string
+      summary:
+        type: string
+        x-nullable: true
+      temperatureC:
+        format: int32
+        type: integer
+      temperatureF:
+        format: int32
+        readOnly: true
+        type: integer
+    type: object
+securityDefinitions:
+  Bearer:
+    description: Using the Authorization header with the Bearer scheme.
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - Bearer:
+      - Bearer
+x-components: {}
+

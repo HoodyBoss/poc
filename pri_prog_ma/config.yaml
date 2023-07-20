@@ -1,0 +1,11 @@
+mode: "live" # local = run library on localhost, live = run library on cloud
+local_subscriber_endpoint: "http://subscribers:8889/main"
+
+strategy:
+  strategy_id: 'x85LRyhGGXJdVVSHNVUz'
+
+logs:
+  env: 'live'
+  level: DEBUG
+
+broker_id: "binance"
