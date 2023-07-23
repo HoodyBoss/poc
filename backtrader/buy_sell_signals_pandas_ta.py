@@ -21,15 +21,18 @@ startdate = date(2017,8,4)
 end_date = date.today()
 print(end_date)
 def getMyPortfolio(stocks = stocksymbols ,start = startdate , end = end_date):
-    data = web.get_data_yahoo(stocks , start = start ,end= end )
+    data = pd.read_csv("XAU_USD/XAU_USD_M1_2011.csv")#web.get_data_yahoo(stocks , start = start ,end= end )
+    # data = web.get_data_yahoo(stocks , start = start ,end= end )
+    data = data[:2000]
+    print(data)
     return data
 
 data = getMyPortfolio(stocksymbols)
 
 ########### Simple Moving Average Implementation #############
 
-data['SMA 30'] = ta.sma(data['Close'],30)
-data['SMA 100'] = ta.sma(data['Close'],100)
+data['SMA 30'] = ta.hma(data['Close'],30)
+data['SMA 100'] = ta.hma(data['Close'],100)
 #SMA BUY SELL
 #Function for buy and sell signal
 def buy_sell(data):

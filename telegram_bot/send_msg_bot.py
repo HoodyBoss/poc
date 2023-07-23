@@ -6,7 +6,7 @@ import requests
 telegramApi = '6017754651:AAHQH9seNbhq-m-GVyH81OSVnaHYJ7wUJNU'
 url = f"https://api.telegram.org/bot{telegramApi}/getUpdates"
 result = requests.get(url).json()
-
+chat_id=""
 for x in result.keys():
     if x == "result" and result["result"]:
         chat_id = result["result"]["sender_chat"]["id"] if "result" in result and "sender_chat" in result["result"] and "id" in result["result"]["sender_chat"] else "0"
