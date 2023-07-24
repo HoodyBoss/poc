@@ -9,7 +9,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from sendgrid.helpers.mail import (Mail, Attachment, FileContent, FileName, FileType, Disposition)
 
-email_smtp_api = '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'
+email_smtp_api = ''
 from_email = 'pomprawit@hotmail.com'
 
 def send_email(to_email, msg, f_data):
