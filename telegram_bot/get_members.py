@@ -43,6 +43,10 @@ def process_csv():
     out_member = yesterday_df.merge(today_df, how='left', indicator='ind').query('ind=="left_only"')
     out_member.to_csv(f"csv/out_member_{today_csv}.csv", index=False)
     print("Out member::", out_member)
+    
+    df = pd.read_csv(f"csv/inout_member_hist.csv")
+    df.loc[len(df.index)] = [today_csv, in_member.to_dict(), out_member.to_dict()]
+    df.to_csv(f"csv/inout_member_hist.csv", index=False)
 
 bot = TelegramClient('bot', api_id, api_hash).start(bot_token=BOT_TOKEN)
 
