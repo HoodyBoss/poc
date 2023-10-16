@@ -45,7 +45,7 @@ def process_csv():
     print("Out member::", out_member)
     
     df = pd.read_csv(f"csv/inout_member_hist.csv")
-    df.loc[len(df.index)] = [today_csv, in_member.to_dict(), out_member.to_dict()]
+    df.loc[len(df.index)] = [today_csv, in_member.to_json(), out_member.to_json()]
     df.to_csv(f"csv/inout_member_hist.csv", index=False)
 
 bot = TelegramClient('bot', api_id, api_hash).start(bot_token=BOT_TOKEN)
