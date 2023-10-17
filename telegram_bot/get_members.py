@@ -10,7 +10,7 @@ api_hash = '0c90201d36f55c231f2ebe5765897061'
 BOT_TOKEN = '6284867484:AAFfIzE6O-9EZT-6d0bVHAx1vo9P5YJPvXk'
 
 #declare group id here, add new group by add new array item
-groups = [-1001877079626, -1001781939396, -1001967606094]
+groups = [-1001877079626, -1001781939396, -1001967606094, -1001851806627]
 
 #main method to access tg group then list member who is not deleted from group
 async def get_users(client, group_id):
